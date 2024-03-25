@@ -1,0 +1,231 @@
+Marking: StudentInfo(repo='dpkansar', first='Devansh', last='Kansara', watiam='dpkansar', studentid=21112551, email='dpkansar@uwaterloo.ca')
+Mark = 0
+
+Running test 0:	 +20
+
+
+--------------
+Running test: tests_a2/test01.in 
+
+# test1.in: expect a line of error message, because vertex id go beyond range.
+# marks = 5
+
+V 5
+E {<3,4>,<4,6>}
+
+Output:
+----
+Error: Invalid edge input
+
+=================================================================
+==3306858==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 152 byte(s) in 1 object(s) allocated from:
+    #0 0x7f2cf2dee787 in operator new[](unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cc:107
+    #1 0x55b0eba6fa82 in Graph::setVector(int) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x1da82)
+    #2 0x55b0eba6de6d in main (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x1be6d)
+    #3 0x7f2cf1e58082 in __libc_start_main ../csu/libc-start.c:308
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7f2cf2dee587 in operator new(unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cc:104
+    #1 0x55b0eba792e2 in __gnu_cxx::new_allocator<int>::allocate(unsigned long, void const*) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x272e2)
+    #2 0x55b0eba77781 in std::allocator_traits<std::allocator<int> >::allocate(std::allocator<int>&, unsigned long) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x25781)
+    #3 0x55b0eba765c3 in std::_Vector_base<int, std::allocator<int> >::_M_allocate(unsigned long) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x245c3)
+    #4 0x55b0eba73d71 in void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x21d71)
+    #5 0x55b0eba72d17 in std::vector<int, std::allocator<int> >::push_back(int const&) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x20d17)
+    #6 0x55b0eba700c6 in Graph::addEdges(int, int) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x1e0c6)
+    #7 0x55b0eba6e672 in main (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x1c672)
+    #8 0x7f2cf1e58082 in __libc_start_main ../csu/libc-start.c:308
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7f2cf2dee587 in operator new(unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cc:104
+    #1 0x55b0eba792e2 in __gnu_cxx::new_allocator<int>::allocate(unsigned long, void const*) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x272e2)
+    #2 0x55b0eba77781 in std::allocator_traits<std::allocator<int> >::allocate(std::allocator<int>&, unsigned long) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x25781)
+    #3 0x55b0eba765c3 in std::_Vector_base<int, std::allocator<int> >::_M_allocate(unsigned long) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x245c3)
+    #4 0x55b0eba73d71 in void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x21d71)
+    #5 0x55b0eba72d17 in std::vector<int, std::allocator<int> >::push_back(int const&) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x20d17)
+    #6 0x55b0eba6ffed in Graph::addEdges(int, int) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x1dfed)
+    #7 0x55b0eba6e672 in main (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x1c672)
+    #8 0x7f2cf1e58082 in __libc_start_main ../csu/libc-start.c:308
+
+SUMMARY: AddressSanitizer: 160 byte(s) leaked in 3 allocation(s).
+----
+
+Expected result:
+----
+Error: Invalid vertice: 6
+----
+
+Marks: 0    (20 total)
+
+--------------
+Running test: tests_a2/test02.in 
+
+# test2.in: expect a line of error message, because no path between the two vertices.
+# marks = 5
+
+V 7
+E {<1,2>,<2,3>,<3,4>,<3,5>}
+s 1 6 
+
+Output:
+----
+Error: There is no path between the given source and destination
+----
+
+Expected result:
+----
+Error: No path between given vertices!
+----
+
+Marks: 5    (25 total)
+
+--------------
+Running test: tests_a2/test03.in 
+
+# test3.in: expect a line of error message, because no path between the two vertices.
+# marks = 5
+
+V 9
+E {<1,2>,<3,4>,<5,6>,<7,8>,<2,4>}
+s 1 8
+
+Output:
+----
+Error: There is no path between the given source and destination
+----
+
+Expected result:
+----
+Error: No path between given vertices!
+----
+
+Marks: 5    (30 total)
+
+--------------
+Running test: tests_a2/test04.in 
+
+# test4.in: expect a line of error message, because vertex id go beyond range.
+# marks = 5
+
+V 5
+E {<3,4>,<4,6>}
+
+Output:
+----
+Error: Invalid edge input
+
+=================================================================
+==3306864==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 152 byte(s) in 1 object(s) allocated from:
+    #0 0x7fcfb8669787 in operator new[](unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cc:107
+    #1 0x559fbcb1da82 in Graph::setVector(int) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x1da82)
+    #2 0x559fbcb1be6d in main (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x1be6d)
+    #3 0x7fcfb76d3082 in __libc_start_main ../csu/libc-start.c:308
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7fcfb8669587 in operator new(unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cc:104
+    #1 0x559fbcb272e2 in __gnu_cxx::new_allocator<int>::allocate(unsigned long, void const*) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x272e2)
+    #2 0x559fbcb25781 in std::allocator_traits<std::allocator<int> >::allocate(std::allocator<int>&, unsigned long) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x25781)
+    #3 0x559fbcb245c3 in std::_Vector_base<int, std::allocator<int> >::_M_allocate(unsigned long) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x245c3)
+    #4 0x559fbcb21d71 in void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x21d71)
+    #5 0x559fbcb20d17 in std::vector<int, std::allocator<int> >::push_back(int const&) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x20d17)
+    #6 0x559fbcb1e0c6 in Graph::addEdges(int, int) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x1e0c6)
+    #7 0x559fbcb1c672 in main (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x1c672)
+    #8 0x7fcfb76d3082 in __libc_start_main ../csu/libc-start.c:308
+
+Indirect leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x7fcfb8669587 in operator new(unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cc:104
+    #1 0x559fbcb272e2 in __gnu_cxx::new_allocator<int>::allocate(unsigned long, void const*) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x272e2)
+    #2 0x559fbcb25781 in std::allocator_traits<std::allocator<int> >::allocate(std::allocator<int>&, unsigned long) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x25781)
+    #3 0x559fbcb245c3 in std::_Vector_base<int, std::allocator<int> >::_M_allocate(unsigned long) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x245c3)
+    #4 0x559fbcb21d71 in void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x21d71)
+    #5 0x559fbcb20d17 in std::vector<int, std::allocator<int> >::push_back(int const&) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x20d17)
+    #6 0x559fbcb1dfed in Graph::addEdges(int, int) (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x1dfed)
+    #7 0x559fbcb1c672 in main (/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a2/grade_build/ece650-a2+0x1c672)
+    #8 0x7fcfb76d3082 in __libc_start_main ../csu/libc-start.c:308
+
+SUMMARY: AddressSanitizer: 160 byte(s) leaked in 3 allocation(s).
+----
+
+Expected result:
+----
+Error: Invalid vertice: 6
+----
+
+Marks: 0    (30 total)
+
+--------------
+Running test: tests_a2/test05.in 
+
+# test5.in: expect 1-2-3-4-5
+# marks = 15: 
+
+V 5
+E {<1,2>,<3,2>,<4,5>,<3,4>}
+s 1 5
+Output:
+----
+1-2-3-4-5
+----
+
+Expected result:
+----
+1-2-3-4-5
+----
+Comparison result:	NoneNone
+
+Marks: 15    (45 total)
+
+--------------
+Running test: tests_a2/test06.in 
+
+# test6.in: expect 1-3-2-5
+# marks = 20:
+
+V 5
+E {<1,3>,<3,2>,<4,5>,<5,2>}
+s 1 5
+Output:
+----
+1-3-2-5
+----
+
+Expected result:
+----
+1-3-2-5
+----
+Comparison result:	NoneNone
+
+Marks: 20    (65 total)
+
+--------------
+Running test: tests_a2/test07.in 
+
+# test7.in: expect 1-4-8-11-13
+# marks = 20: 
+
+V 15
+E {<1,2>,<1,5>,<2,5>,<3,5>,<1,4>,<2,3>,<4,8>,<4,6>,<4,9>,<6,7>,<7,8>,<8,9>,<6,9>,<7,9>,<8,11>,<8,10>,<10,11>,<7,10>,<7,11>,<11,13>,<11,12>,<11,14>,<13,14>,<12,14>,<12,13>}
+s 1 13
+
+Output:
+----
+1-4-8-11-13
+----
+
+Expected result:
+----
+1-4-8-11-13
+----
+Comparison result:	NoneNone
+
+Marks: 20    (85 total)
+
+
+--------------
+
+Finished marking
+Total mark: 85/100
+Final mark: 85
