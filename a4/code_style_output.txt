@@ -1,0 +1,692 @@
+Enabled checks:
+    clang-analyzer-apiModeling.StdCLibraryFunctions
+    clang-analyzer-apiModeling.TrustNonnull
+    clang-analyzer-apiModeling.google.GTest
+    clang-analyzer-apiModeling.llvm.CastValue
+    clang-analyzer-apiModeling.llvm.ReturnValue
+    clang-analyzer-core.CallAndMessage
+    clang-analyzer-core.DivideZero
+    clang-analyzer-core.DynamicTypePropagation
+    clang-analyzer-core.NonNullParamChecker
+    clang-analyzer-core.NonnilStringConstants
+    clang-analyzer-core.NullDereference
+    clang-analyzer-core.StackAddrEscapeBase
+    clang-analyzer-core.StackAddressEscape
+    clang-analyzer-core.UndefinedBinaryOperatorResult
+    clang-analyzer-core.VLASize
+    clang-analyzer-core.builtin.BuiltinFunctions
+    clang-analyzer-core.builtin.NoReturnFunctions
+    clang-analyzer-core.uninitialized.ArraySubscript
+    clang-analyzer-core.uninitialized.Assign
+    clang-analyzer-core.uninitialized.Branch
+    clang-analyzer-core.uninitialized.CapturedBlockVariable
+    clang-analyzer-core.uninitialized.UndefReturn
+    clang-analyzer-cplusplus.InnerPointer
+    clang-analyzer-cplusplus.Move
+    clang-analyzer-cplusplus.NewDelete
+    clang-analyzer-cplusplus.NewDeleteLeaks
+    clang-analyzer-cplusplus.PureVirtualCall
+    clang-analyzer-cplusplus.SelfAssignment
+    clang-analyzer-cplusplus.SmartPtr
+    clang-analyzer-cplusplus.VirtualCallModeling
+    clang-analyzer-deadcode.DeadStores
+    clang-analyzer-fuchsia.HandleChecker
+    clang-analyzer-nullability.NullPassedToNonnull
+    clang-analyzer-nullability.NullReturnedFromNonnull
+    clang-analyzer-nullability.NullabilityBase
+    clang-analyzer-nullability.NullableDereferenced
+    clang-analyzer-nullability.NullablePassedToNonnull
+    clang-analyzer-nullability.NullableReturnedFromNonnull
+    clang-analyzer-optin.cplusplus.UninitializedObject
+    clang-analyzer-optin.cplusplus.VirtualCall
+    clang-analyzer-optin.mpi.MPI-Checker
+    clang-analyzer-optin.osx.OSObjectCStyleCast
+    clang-analyzer-optin.osx.cocoa.localizability.EmptyLocalizationContextChecker
+    clang-analyzer-optin.osx.cocoa.localizability.NonLocalizedStringChecker
+    clang-analyzer-optin.performance.GCDAntipattern
+    clang-analyzer-optin.performance.Padding
+    clang-analyzer-optin.portability.UnixAPI
+    clang-analyzer-osx.API
+    clang-analyzer-osx.MIG
+    clang-analyzer-osx.NSOrCFErrorDerefChecker
+    clang-analyzer-osx.NumberObjectConversion
+    clang-analyzer-osx.OSObjectRetainCount
+    clang-analyzer-osx.ObjCProperty
+    clang-analyzer-osx.SecKeychainAPI
+    clang-analyzer-osx.cocoa.AtSync
+    clang-analyzer-osx.cocoa.AutoreleaseWrite
+    clang-analyzer-osx.cocoa.ClassRelease
+    clang-analyzer-osx.cocoa.Dealloc
+    clang-analyzer-osx.cocoa.IncompatibleMethodTypes
+    clang-analyzer-osx.cocoa.Loops
+    clang-analyzer-osx.cocoa.MissingSuperCall
+    clang-analyzer-osx.cocoa.NSAutoreleasePool
+    clang-analyzer-osx.cocoa.NSError
+    clang-analyzer-osx.cocoa.NilArg
+    clang-analyzer-osx.cocoa.NonNilReturnValue
+    clang-analyzer-osx.cocoa.ObjCGenerics
+    clang-analyzer-osx.cocoa.RetainCount
+    clang-analyzer-osx.cocoa.RetainCountBase
+    clang-analyzer-osx.cocoa.RunLoopAutoreleaseLeak
+    clang-analyzer-osx.cocoa.SelfInit
+    clang-analyzer-osx.cocoa.SuperDealloc
+    clang-analyzer-osx.cocoa.UnusedIvars
+    clang-analyzer-osx.cocoa.VariadicMethodTypes
+    clang-analyzer-osx.coreFoundation.CFError
+    clang-analyzer-osx.coreFoundation.CFNumber
+    clang-analyzer-osx.coreFoundation.CFRetainRelease
+    clang-analyzer-osx.coreFoundation.containers.OutOfBounds
+    clang-analyzer-osx.coreFoundation.containers.PointerSizedValues
+    clang-analyzer-security.FloatLoopCounter
+    clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling
+    clang-analyzer-security.insecureAPI.SecuritySyntaxChecker
+    clang-analyzer-security.insecureAPI.UncheckedReturn
+    clang-analyzer-security.insecureAPI.bcmp
+    clang-analyzer-security.insecureAPI.bcopy
+    clang-analyzer-security.insecureAPI.bzero
+    clang-analyzer-security.insecureAPI.decodeValueOfObjCType
+    clang-analyzer-security.insecureAPI.getpw
+    clang-analyzer-security.insecureAPI.gets
+    clang-analyzer-security.insecureAPI.mkstemp
+    clang-analyzer-security.insecureAPI.mktemp
+    clang-analyzer-security.insecureAPI.rand
+    clang-analyzer-security.insecureAPI.strcpy
+    clang-analyzer-security.insecureAPI.vfork
+    clang-analyzer-unix.API
+    clang-analyzer-unix.DynamicMemoryModeling
+    clang-analyzer-unix.Malloc
+    clang-analyzer-unix.MallocSizeof
+    clang-analyzer-unix.MismatchedDeallocator
+    clang-analyzer-unix.Vfork
+    clang-analyzer-unix.cstring.BadSizeArg
+    clang-analyzer-unix.cstring.CStringModeling
+    clang-analyzer-unix.cstring.NullArg
+    clang-analyzer-valist.CopyToSelf
+    clang-analyzer-valist.Uninitialized
+    clang-analyzer-valist.Unterminated
+    clang-analyzer-valist.ValistBase
+
+}
+^
+    CHECK(a == 5);
+    ^
+#define CHECK(...) DOCTEST_CHECK(__VA_ARGS__)
+                   ^
+#define DOCTEST_CHECK(...) DOCTEST_ASSERT_IMPLEMENT_1(DT_CHECK, __VA_ARGS__)
+                           ^
+        DOCTEST_ASSERT_IMPLEMENT_2(assert_type, __VA_ARGS__);                                      \
+        ^
+                                   ^
+        : AssertData(at, file, line, expr, exception_type, exception_string) { }
+          ^
+    m_exception_string(exception_string) {
+    ^
+String::String(const String& other) { copy(other); }
+                                      ^
+    if(other.isOnStack()) {
+    ^
+        memcpy(allocate(other.data.size), other.data.ptr, other.data.size);
+               ^
+    if (sz <= last) {
+        ^
+    if (sz <= last) {
+    ^
+        data.ptr = new char[data.capacity];
+                   ^
+        memcpy(allocate(other.data.size), other.data.ptr, other.data.size);
+               ^
+String::String(const String& other) { copy(other); }
+                                      ^
+    m_exception_string(exception_string) {
+    ^
+        : AssertData(at, file, line, expr, exception_type, exception_string) { }
+          ^
+    CHECK(a == 5);
+    ^
+#define CHECK(...) DOCTEST_CHECK(__VA_ARGS__)
+                   ^
+#define DOCTEST_CHECK(...) DOCTEST_ASSERT_IMPLEMENT_1(DT_CHECK, __VA_ARGS__)
+                           ^
+        DOCTEST_ASSERT_IMPLEMENT_2(assert_type, __VA_ARGS__);                                      \
+        ^
+                                   ^
+    CHECK(a == 5);
+    ^
+#define CHECK(...) DOCTEST_CHECK(__VA_ARGS__)
+                   ^
+#define DOCTEST_CHECK(...) DOCTEST_ASSERT_IMPLEMENT_1(DT_CHECK, __VA_ARGS__)
+                           ^
+        DOCTEST_ASSERT_IMPLEMENT_2(assert_type, __VA_ARGS__);                                      \
+        ^
+    DOCTEST_WRAP_IN_TRY(DOCTEST_RB.setResult(                                                      \
+                        ^
+        x;                                                                                         \
+        ^
+        m_decomp = res.m_decomp;
+        ^
+    if(this != &other) {
+    ^
+        if(!isOnStack())
+        ^
+        copy(other);
+        ^
+    if(other.isOnStack()) {
+    ^
+}
+^
+        : AssertData(at, file, line, expr, exception_type, exception_string) { }
+                                                                               ^
+    CHECK(true == false);
+    ^
+#define CHECK(...) DOCTEST_CHECK(__VA_ARGS__)
+                   ^
+#define DOCTEST_CHECK(...) DOCTEST_ASSERT_IMPLEMENT_1(DT_CHECK, __VA_ARGS__)
+                           ^
+        DOCTEST_ASSERT_IMPLEMENT_2(assert_type, __VA_ARGS__);                                      \
+        ^
+                                   ^
+        : AssertData(at, file, line, expr, exception_type, exception_string) { }
+                                                           ^
+            StringContains(const String& str) : content(str), isContains(false) { }
+                                                ^
+Contains::Contains(const String& str) : string(str) { }
+                                        ^
+String::String(const String& other) { copy(other); }
+                                      ^
+    if(other.isOnStack()) {
+    ^
+        memcpy(allocate(other.data.size), other.data.ptr, other.data.size);
+               ^
+    if (sz <= last) {
+        ^
+    if (sz <= last) {
+    ^
+        data.ptr = new char[data.capacity];
+                   ^
+        memcpy(allocate(other.data.size), other.data.ptr, other.data.size);
+               ^
+String::String(const String& other) { copy(other); }
+                                      ^
+Contains::Contains(const String& str) : string(str) { }
+                                        ^
+            StringContains(const String& str) : content(str), isContains(false) { }
+                                                ^
+        : AssertData(at, file, line, expr, exception_type, exception_string) { }
+                                                           ^
+        : AssertData(at, file, line, expr, exception_type, exception_string) { }
+                                                                               ^
+    CHECK(a == 5);
+    ^
+#define CHECK(...) DOCTEST_CHECK(__VA_ARGS__)
+                   ^
+#define DOCTEST_CHECK(...) DOCTEST_ASSERT_IMPLEMENT_1(DT_CHECK, __VA_ARGS__)
+                           ^
+        DOCTEST_ASSERT_IMPLEMENT_2(assert_type, __VA_ARGS__);                                      \
+        ^
+    DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB)                                                    \
+                                    ^
+    CHECK(a == 5);
+    ^
+#define CHECK(...) DOCTEST_CHECK(__VA_ARGS__)
+                   ^
+#define DOCTEST_CHECK(...) DOCTEST_ASSERT_IMPLEMENT_1(DT_CHECK, __VA_ARGS__)
+                           ^
+        DOCTEST_ASSERT_IMPLEMENT_2(assert_type, __VA_ARGS__);                                      \
+        ^
+            ^
+        x;                                                                                         \
+        ^
+        DOCTEST_DO_BINARY_EXPRESSION_COMPARISON(==, " == ", DOCTEST_CMP_EQ) //!OCLINT bitwise operator in conditional
+        ^
+        if(m_at & assertType::is_false)                                                            \
+        ^
+        DOCTEST_DO_BINARY_EXPRESSION_COMPARISON(==, " == ", DOCTEST_CMP_EQ) //!OCLINT bitwise operator in conditional
+        ^
+            ^
+        DOCTEST_DO_BINARY_EXPRESSION_COMPARISON(==, " == ", DOCTEST_CMP_EQ) //!OCLINT bitwise operator in conditional
+        ^
+           ^
+        DOCTEST_DO_BINARY_EXPRESSION_COMPARISON(==, " == ", DOCTEST_CMP_EQ) //!OCLINT bitwise operator in conditional
+        ^
+                   ^
+        DOCTEST_DO_BINARY_EXPRESSION_COMPARISON(==, " == ", DOCTEST_CMP_EQ) //!OCLINT bitwise operator in conditional
+        ^
+        ^
+        DOCTEST_DO_BINARY_EXPRESSION_COMPARISON(==, " == ", DOCTEST_CMP_EQ) //!OCLINT bitwise operator in conditional
+        ^
+        return Result(res);                                                                        \
+               ^
+            , m_decomp(decomposition) {}
+              ^
+String::String(const String& other) { copy(other); }
+                                      ^
+    if(other.isOnStack()) {
+    ^
+        memcpy(allocate(other.data.size), other.data.ptr, other.data.size);
+               ^
+    if (sz <= last) {
+        ^
+    if (sz <= last) {
+    ^
+        data.ptr = new char[data.capacity];
+                   ^
+        memcpy(allocate(other.data.size), other.data.ptr, other.data.size);
+               ^
+String::String(const String& other) { copy(other); }
+                                      ^
+            , m_decomp(decomposition) {}
+              ^
+        DOCTEST_DO_BINARY_EXPRESSION_COMPARISON(==, " == ", DOCTEST_CMP_EQ) //!OCLINT bitwise operator in conditional
+        ^
+        return Result(res);                                                                        \
+               ^
+    CHECK(a == 5);
+    ^
+#define CHECK(...) DOCTEST_CHECK(__VA_ARGS__)
+                   ^
+#define DOCTEST_CHECK(...) DOCTEST_ASSERT_IMPLEMENT_1(DT_CHECK, __VA_ARGS__)
+                           ^
+        DOCTEST_ASSERT_IMPLEMENT_2(assert_type, __VA_ARGS__);                                      \
+        ^
+            ^
+        x;                                                                                         \
+        ^
+    CHECK(a == 5);
+    ^
+#define CHECK(...) DOCTEST_CHECK(__VA_ARGS__)
+                   ^
+#define DOCTEST_CHECK(...) DOCTEST_ASSERT_IMPLEMENT_1(DT_CHECK, __VA_ARGS__)
+                           ^
+        DOCTEST_ASSERT_IMPLEMENT_2(assert_type, __VA_ARGS__);                                      \
+        ^
+    DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB)                                                    \
+                                    ^
+    CHECK(true == false);
+    ^
+#define CHECK(...) DOCTEST_CHECK(__VA_ARGS__)
+                   ^
+#define DOCTEST_CHECK(...) DOCTEST_ASSERT_IMPLEMENT_1(DT_CHECK, __VA_ARGS__)
+                           ^
+        DOCTEST_ASSERT_IMPLEMENT_2(assert_type, __VA_ARGS__);                                      \
+        ^
+    DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB)                                                    \
+                                    ^
+    CHECK(true == false);
+    ^
+#define CHECK(...) DOCTEST_CHECK(__VA_ARGS__)
+                   ^
+#define DOCTEST_CHECK(...) DOCTEST_ASSERT_IMPLEMENT_1(DT_CHECK, __VA_ARGS__)
+                           ^
+        DOCTEST_ASSERT_IMPLEMENT_2(assert_type, __VA_ARGS__);                                      \
+        ^
+            ^
+        x;                                                                                         \
+        ^
+        DOCTEST_DO_BINARY_EXPRESSION_COMPARISON(==, " == ", DOCTEST_CMP_EQ) //!OCLINT bitwise operator in conditional
+        ^
+        if(m_at & assertType::is_false)                                                            \
+        ^
+        DOCTEST_DO_BINARY_EXPRESSION_COMPARISON(==, " == ", DOCTEST_CMP_EQ) //!OCLINT bitwise operator in conditional
+        ^
+            ^
+        DOCTEST_DO_BINARY_EXPRESSION_COMPARISON(==, " == ", DOCTEST_CMP_EQ) //!OCLINT bitwise operator in conditional
+        ^
+                ^
+        DOCTEST_DO_BINARY_EXPRESSION_COMPARISON(==, " == ", DOCTEST_CMP_EQ) //!OCLINT bitwise operator in conditional
+        ^
+            return Result(res, stringifyBinaryExpr(lhs, op_str, rhs));                             \
+                   ^
+            , m_decomp(decomposition) {}
+              ^
+String::String(const String& other) { copy(other); }
+                                      ^
+    if(other.isOnStack()) {
+    ^
+        memcpy(allocate(other.data.size), other.data.ptr, other.data.size);
+               ^
+    if (sz <= last) {
+        ^
+    if (sz <= last) {
+    ^
+        data.ptr = new char[data.capacity];
+                   ^
+        memcpy(allocate(other.data.size), other.data.ptr, other.data.size);
+               ^
+String::String(const String& other) { copy(other); }
+                                      ^
+            , m_decomp(decomposition) {}
+              ^
+        DOCTEST_DO_BINARY_EXPRESSION_COMPARISON(==, " == ", DOCTEST_CMP_EQ) //!OCLINT bitwise operator in conditional
+        ^
+            return Result(res, stringifyBinaryExpr(lhs, op_str, rhs));                             \
+                   ^
+    CHECK(true == false);
+    ^
+#define CHECK(...) DOCTEST_CHECK(__VA_ARGS__)
+                   ^
+#define DOCTEST_CHECK(...) DOCTEST_ASSERT_IMPLEMENT_1(DT_CHECK, __VA_ARGS__)
+                           ^
+        DOCTEST_ASSERT_IMPLEMENT_2(assert_type, __VA_ARGS__);                                      \
+        ^
+            ^
+        x;                                                                                         \
+        ^
+    CHECK(true == false);
+    ^
+#define CHECK(...) DOCTEST_CHECK(__VA_ARGS__)
+                   ^
+#define DOCTEST_CHECK(...) DOCTEST_ASSERT_IMPLEMENT_1(DT_CHECK, __VA_ARGS__)
+                           ^
+        DOCTEST_ASSERT_IMPLEMENT_2(assert_type, __VA_ARGS__);                                      \
+        ^
+    DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB)                                                    \
+                                    ^
+clang-tidy -p=../py/repos/dpkansar/a4/grade_build /home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp
+inline bool     Solver::addClause       (Lit p, Lit q)          { add_tmp.clear(); add_tmp.push(p); add_tmp.push(q); return addClause_(add_tmp); }
+                                                                                                                     ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:82:29: note: Assuming 'i' is < 'size'
+    for(unsigned int i = 0; i < size; ++i)
+                            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:82:5: note: Loop condition is true.  Entering loop body
+    for(unsigned int i = 0; i < size; ++i)
+    ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:84:37: note: Assuming 'j' is < 'k'
+            for(unsigned int j = 0; j < k; ++j)
+                                    ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:84:13: note: Loop condition is true.  Entering loop body
+            for(unsigned int j = 0; j < k; ++j)
+            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:84:37: note: Assuming 'j' is >= 'k'
+            for(unsigned int j = 0; j < k; ++j)
+                                    ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:84:13: note: Loop condition is false. Execution continues on line 82
+            for(unsigned int j = 0; j < k; ++j)
+            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:82:29: note: Assuming 'i' is < 'size'
+    for(unsigned int i = 0; i < size; ++i)
+                            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:82:5: note: Loop condition is true.  Entering loop body
+    for(unsigned int i = 0; i < size; ++i)
+    ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:84:13: note: Loop condition is true.  Entering loop body
+            for(unsigned int j = 0; j < k; ++j)
+            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:84:13: note: Loop condition is false. Execution continues on line 82
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:82:29: note: Assuming 'i' is >= 'size'
+    for(unsigned int i = 0; i < size; ++i)
+                            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:82:5: note: Loop condition is false. Execution continues on line 92
+    for(unsigned int i = 0; i < size; ++i)
+    ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:92:6: note: Loop condition is true.  Entering loop body
+     for(unsigned int i = 0; i < k; ++i)
+     ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:95:9: note: Loop condition is true.  Entering loop body
+        for(unsigned int j = 0; j < size; ++j)
+        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:95:9: note: Loop condition is true.  Entering loop body
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:95:9: note: Loop condition is false. Execution continues on line 99
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:92:6: note: Loop condition is false. Execution continues on line 104
+     for(unsigned int i = 0; i < k; ++i)
+     ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:104:7: note: Loop condition is true.  Entering loop body
+      for(unsigned int i = 0; i < size; ++i)
+      ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:106:9: note: Loop condition is false. Execution continues on line 104
+        for(unsigned int j = 0; j < k - 1; j++)
+        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:104:7: note: Loop condition is true.  Entering loop body
+      for(unsigned int i = 0; i < size; ++i)
+      ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:106:9: note: Loop condition is false. Execution continues on line 104
+        for(unsigned int j = 0; j < k - 1; j++)
+        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:104:7: note: Loop condition is false. Execution continues on line 115
+      for(unsigned int i = 0; i < size; ++i)
+      ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:115:9: note: Loop condition is true.  Entering loop body
+        for(unsigned int i = 0; i < k; ++i)
+        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:117:13: note: Loop condition is true.  Entering loop body
+            for(unsigned int j = 0; j < size - 1; ++j)
+            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:119:17: note: Loop condition is true.  Entering loop body
+                for(unsigned int q = j + 1 ; q < size ; ++q)
+                ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:121:21: note: Calling 'Solver::addClause'
+                    solver.addClause(~x[j][i],~x[q][i]);
+                    ^
+inline bool     Solver::addClause       (Lit p, Lit q)          { add_tmp.clear(); add_tmp.push(p); add_tmp.push(q); return addClause_(add_tmp); }
+                                                                                   ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                             ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                         ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                                        ^
+    if (cap >= min_cap) return;
+        ^
+    if (cap >= min_cap) return;
+    ^
+    if ( ((size_max <= std::numeric_limits<int>::max()) && (add > size_max - cap))
+          ^
+    if ( ((size_max <= std::numeric_limits<int>::max()) && (add > size_max - cap))
+                                                            ^
+    if ( ((size_max <= std::numeric_limits<int>::max()) && (add > size_max - cap))
+         ^
+    ||   (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM) )
+                       ^
+    ||   (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM) )
+           ^
+    ||   (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM) )
+                                                                           ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                                        ^
+inline bool     Solver::addClause       (Lit p, Lit q)          { add_tmp.clear(); add_tmp.push(p); add_tmp.push(q); return addClause_(add_tmp); }
+                                                                                   ^
+inline bool     Solver::addClause       (Lit p, Lit q)          { add_tmp.clear(); add_tmp.push(p); add_tmp.push(q); return addClause_(add_tmp); }
+                                                                                                    ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                             ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                         ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                                        ^
+    if (cap >= min_cap) return;
+        ^
+    if (cap >= min_cap) return;
+    ^
+    if ( ((size_max <= std::numeric_limits<int>::max()) && (add > size_max - cap))
+          ^
+    if ( ((size_max <= std::numeric_limits<int>::max()) && (add > size_max - cap))
+                                                            ^
+    if ( ((size_max <= std::numeric_limits<int>::max()) && (add > size_max - cap))
+         ^
+    ||   (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM) )
+                       ^
+    ||   (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM) )
+           ^
+    ||   (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM) )
+          ^
+    ||   (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM) )
+                                                                              ^
+/usr/include/errno.h:38:16: note: expanded from macro 'errno'
+# define errno (*__errno_location ())
+               ^
+    if ( ((size_max <= std::numeric_limits<int>::max()) && (add > size_max - cap))
+    ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                                        ^
+inline bool     Solver::addClause       (Lit p, Lit q)          { add_tmp.clear(); add_tmp.push(p); add_tmp.push(q); return addClause_(add_tmp); }
+                                                                                                    ^
+inline bool     Solver::addClause       (Lit p, Lit q)          { add_tmp.clear(); add_tmp.push(p); add_tmp.push(q); return addClause_(add_tmp); }
+                                                                                                                     ^
+   ~vec()                                                       { clear(true); }
+                                                                  ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:82:29: note: Assuming 'i' is < 'size'
+    for(unsigned int i = 0; i < size; ++i)
+                            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:82:5: note: Loop condition is true.  Entering loop body
+    for(unsigned int i = 0; i < size; ++i)
+    ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:84:37: note: Assuming 'j' is < 'k'
+            for(unsigned int j = 0; j < k; ++j)
+                                    ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:84:13: note: Loop condition is true.  Entering loop body
+            for(unsigned int j = 0; j < k; ++j)
+            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:84:37: note: Assuming 'j' is < 'k'
+            for(unsigned int j = 0; j < k; ++j)
+                                    ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:84:13: note: Loop condition is true.  Entering loop body
+            for(unsigned int j = 0; j < k; ++j)
+            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:84:37: note: Assuming 'j' is >= 'k'
+            for(unsigned int j = 0; j < k; ++j)
+                                    ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:84:13: note: Loop condition is false. Execution continues on line 82
+            for(unsigned int j = 0; j < k; ++j)
+            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:82:29: note: Assuming 'i' is >= 'size'
+    for(unsigned int i = 0; i < size; ++i)
+                            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:82:5: note: Loop condition is false. Execution continues on line 92
+    for(unsigned int i = 0; i < size; ++i)
+    ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:92:6: note: Loop condition is true.  Entering loop body
+     for(unsigned int i = 0; i < k; ++i)
+     ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:95:9: note: Loop condition is true.  Entering loop body
+        for(unsigned int j = 0; j < size; ++j)
+        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:95:9: note: Loop condition is false. Execution continues on line 99
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:92:6: note: Loop condition is true.  Entering loop body
+     for(unsigned int i = 0; i < k; ++i)
+     ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:95:9: note: Loop condition is true.  Entering loop body
+        for(unsigned int j = 0; j < size; ++j)
+        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:95:9: note: Loop condition is false. Execution continues on line 99
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:92:6: note: Loop condition is false. Execution continues on line 104
+     for(unsigned int i = 0; i < k; ++i)
+     ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:104:7: note: Loop condition is true.  Entering loop body
+      for(unsigned int i = 0; i < size; ++i)
+      ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:106:9: note: Loop condition is true.  Entering loop body
+        for(unsigned int j = 0; j < k - 1; j++)
+        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:108:13: note: Loop condition is true.  Entering loop body
+            for(unsigned int q = j+1 ; q < k; ++q)
+            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:108:13: note: Loop condition is false. Execution continues on line 106
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:106:9: note: Loop condition is false. Execution continues on line 104
+        for(unsigned int j = 0; j < k - 1; j++)
+        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:104:7: note: Loop condition is false. Execution continues on line 115
+      for(unsigned int i = 0; i < size; ++i)
+      ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:115:9: note: Loop condition is true.  Entering loop body
+        for(unsigned int i = 0; i < k; ++i)
+        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:117:13: note: Loop condition is false. Execution continues on line 115
+            for(unsigned int j = 0; j < size - 1; ++j)
+            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:115:9: note: Loop condition is true.  Entering loop body
+        for(unsigned int i = 0; i < k; ++i)
+        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:117:13: note: Loop condition is false. Execution continues on line 115
+            for(unsigned int j = 0; j < size - 1; ++j)
+            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:115:9: note: Loop condition is false. Execution continues on line 126
+        for(unsigned int i = 0; i < k; ++i)
+        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:126:33: note: Assuming the condition is false
+        for(unsigned int i = 0; i < Vertices.size(); ++i)
+                                ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:126:9: note: Loop condition is false. Execution continues on line 139
+        for(unsigned int i = 0; i < Vertices.size(); ++i)
+        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:139:34: note: Assuming the condition is true
+        for (unsigned int i = 0; i < first.size(); ++i) 
+                                 ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:139:9: note: Loop condition is true.  Entering loop body
+        for (unsigned int i = 0; i < first.size(); ++i) 
+        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:142:13: note: Loop condition is true.  Entering loop body
+            for (unsigned int j = 0; j < k; ++j) 
+            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:144:17: note: Calling 'vec::push'
+                li.push(x[first[i]][j]);
+                ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                             ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                         ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                                        ^
+    if (cap >= min_cap) return;
+               ^
+    if (cap >= min_cap) return;
+    ^
+    if ( ((size_max <= std::numeric_limits<int>::max()) && (add > size_max - cap))
+          ^
+    if ( ((size_max <= std::numeric_limits<int>::max()) && (add > size_max - cap))
+         ^
+    ||   (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM) )
+                       ^
+    ||   (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM) )
+           ^
+    ||   (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM) )
+                                                                           ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                                        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:144:17: note: Returned allocated memory
+                li.push(x[first[i]][j]);
+                ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:142:13: note: Loop condition is true.  Entering loop body
+            for (unsigned int j = 0; j < k; ++j) 
+            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:144:17: note: Calling 'vec::push'
+                li.push(x[first[i]][j]);
+                ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                             ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                         ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                                        ^
+    if (cap >= min_cap) return;
+               ^
+    if (cap >= min_cap) return;
+    ^
+    if ( ((size_max <= std::numeric_limits<int>::max()) && (add > size_max - cap))
+          ^
+    if ( ((size_max <= std::numeric_limits<int>::max()) && (add > size_max - cap))
+         ^
+    ||   (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM) )
+                       ^
+    ||   (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM) )
+           ^
+    ||   (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM) )
+          ^
+    ||   (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM) )
+                                                                              ^
+/usr/include/errno.h:38:16: note: expanded from macro 'errno'
+# define errno (*__errno_location ())
+               ^
+    if ( ((size_max <= std::numeric_limits<int>::max()) && (add > size_max - cap))
+    ^
+    void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); new (&data[sz++]) T(elem); }
+                                                        ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:144:17: note: Reallocation failed
+                li.push(x[first[i]][j]);
+                ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:142:13: note: Loop condition is false. Execution continues on line 147
+            for (unsigned int j = 0; j < k; ++j) 
+            ^
+/home/a4xiong/ece650-2024-winter/grading/py/repos/dpkansar/a4/ece650-a4.cpp:149:9: note: Calling '~vec'
+        }
+        ^
+   ~vec()                                                       { clear(true); }
+                                                                  ^
